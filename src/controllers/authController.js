@@ -1,14 +1,8 @@
 const authService = require('../services/authService');
-const { validateRegisterInput, validateLoginInput } = require('../utils/validators');
 const { sendSuccess, sendError } = require('../utils/response');
 
 async function register(req, res, next) {
   try {
-    const errors = validateRegisterInput(req.body);
-    if (errors.length > 0) {
-      return sendError(res, 'Validation failed', 400, errors);
-    }
-
     const { name, email, password, role } = req.body;
     const result = await authService.register({ name, email, password, role });
     if (!result.ok) {
@@ -22,11 +16,6 @@ async function register(req, res, next) {
 
 async function login(req, res, next) {
   try {
-    const errors = validateLoginInput(req.body);
-    if (errors.length > 0) {
-      return sendError(res, 'Validation failed', 400, errors);
-    }
-
     const { email, password } = req.body;
     const result = await authService.login({ email, password });
     if (!result.ok) {
