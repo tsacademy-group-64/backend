@@ -1,5 +1,15 @@
 const { Expense } = require('../models/Expense');
 
+// Same populated names the CRUD endpoints return, so the frontend always
+// receives employee/manager names instead of bare ids.
+const POPULATE = 'name email role';
+
+async function populateNames(expense) {
+  await expense.populate('submittedBy', POPULATE);
+  await expense.populate('reviewedBy', POPULATE);
+  return expense;
+}
+
 // Every function returns { ok, status, message, data } so the controller can
 // map the result straight onto the API response envelope.
 
@@ -31,6 +41,7 @@ async function approveExpense({ expenseId, manager }) {
     rejectionReason: null,
   });
   await expense.save();
+  await populateNames(expense);
 
   return { ok: true, status: 200, message: 'Expense approved', data: { expense } };
 }
@@ -52,6 +63,7 @@ async function rejectExpense({ expenseId, manager, reason }) {
     reviewedAt: new Date(),
   });
   await expense.save();
+  await populateNames(expense);
 
   return { ok: true, status: 200, message: 'Expense rejected', data: { expense } };
 }

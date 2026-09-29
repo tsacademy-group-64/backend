@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 const { EXPENSE_STATUSES } = require('../utils/constants');
 
 // Shared team contract: created here so the approval workflow has something to
-// act on. The expense CRUD teammate owns the endpoints and may extend this
-// schema (e.g. extra fields), but keep the approval-related fields intact:
-// status, rejectionReason, reviewedBy, reviewedAt.
+// act on. The expense CRUD layer owns create/list/update/delete; keep the
+// approval-related fields intact: status, rejectionReason, reviewedBy, reviewedAt.
 const expenseSchema = new mongoose.Schema(
   {
     title: {
@@ -28,6 +27,12 @@ const expenseSchema = new mongoose.Schema(
       type: String,
       trim: true,
       maxlength: [60, 'Category must be at most 60 characters'],
+      default: '',
+    },
+    receiptDetails: {
+      type: String,
+      trim: true,
+      maxlength: [1000, 'Receipt details must be at most 1000 characters'],
       default: '',
     },
     expenseDate: {
@@ -66,8 +71,15 @@ const expenseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-expenseSchema.set('toJSON', { virtuals: true });
-expenseSchema.set('toObject', { virtuals: true });
+// Serialize without the internal mongoose version key — it is not part of the
+// public API contract.
+function stripInternalFields(_doc, ret) {
+  delete ret.__v;
+  return ret;
+}
+
+expenseSchema.set('toJSON', { virtuals: true, transform: stripInternalFields });
+expenseSchema.set('toObject', { virtuals: true, transform: stripInternalFields });
 
 const Expense = mongoose.model('Expense', expenseSchema);
 

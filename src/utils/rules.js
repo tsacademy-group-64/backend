@@ -118,9 +118,22 @@ function optional(...rules) {
   };
 }
 
+// Cross-field range check: this date must not be after `otherField`.
+// Used for ?fromDate= / ?toDate=. Both fields are validated individually too.
+function notAfter(otherField) {
+  return (value, allValues) => {
+    if (isEmpty(value) || isEmpty(allValues[otherField])) return undefined;
+    const from = new Date(value).getTime();
+    const to = new Date(allValues[otherField]).getTime();
+    if (Number.isNaN(from) || Number.isNaN(to)) return undefined;
+    return from > to ? `must not be after ${otherField}` : undefined;
+  };
+}
+
 module.exports = {
   EMAIL_REGEX,
   MONGO_ID_REGEX,
+  isEmpty,
   required,
   string,
   email,
@@ -132,4 +145,5 @@ module.exports = {
   mongoId,
   date,
   optional,
+  notAfter,
 };

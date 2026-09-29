@@ -9,6 +9,7 @@ router.get('/health', (req, res) => {
 });
 
 router.use('/auth', require('./authRoutes'));
+router.use('/expenses', require('./expenseRoutes'));
 router.use('/expenses', require('./expenseApprovalRoutes'));
 
 module.exports = router;

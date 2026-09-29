@@ -21,7 +21,7 @@ async function reject(req, res, next) {
     const result = await approvalService.rejectExpense({
       expenseId: req.params.id,
       manager: req.user,
-      reason: req.body.reason,
+      reason: req.body.rejectionReason,
     });
     if (!result.ok) {
       return sendError(res, result.message, result.status);
