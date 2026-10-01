@@ -1,0 +1,307 @@
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #180a0a;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* =========================
+   NAVIGATION BAR
+========================= */
+
+.navbar {
+  background: #1f2937;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar h2 {
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.nav-links a {
+  color: white;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  color: #60a5fa;
+}
+
+.logout-button {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logout-button:hover {
+  background: #b91c1c;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.page-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.primary-button {
+  background: #2563eb;
+  color: white;
+}
+
+.primary-button:hover {
+  background: #1d4ed8;
+}
+
+.danger-button {
+  background: #dc2626;
+  color: white;
+}
+
+.danger-button:hover {
+  background: #b91c1c;
+}
+
+.success-button {
+  background: #16a34a;
+  color: white;
+}
+
+.success-button:hover {
+  background: #15803d;
+}
+
+/* =========================
+   FORMS
+========================= */
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.dashboard-card {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 6px solid #38bdf8;
+}
+
+.card h1 {
+color: #5f4848;
+}
+.card h2 {
+color: #5f4848;
+}
+
+.dashboard-card h3 {
+  margin-top: 0;
+  color: #374151;
+  font-size: 16px;
+}
+
+.dashboard-card p {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 0;
+  color: #111827;
+}
+
+/* Total Expenses */
+.dashboard-card:nth-child(1) {
+  background: #dbeafe;
+  border-left-color: #3b82f6;
+}
+
+/* Total Amount */
+.dashboard-card:nth-child(2) {
+  background: #dcfce7;
+  border-left-color: #22c55e;
+}
+
+/* Pending */
+.dashboard-card:nth-child(3) {
+  background: #fef3c7;
+  border-left-color: #f59e0b;
+}
+
+/* Approved */
+.dashboard-card:nth-child(4) {
+  background: #d1fae5;
+  border-left-color: #10b981;
+}
+
+/* Rejected */
+.dashboard-card:nth-child(5) {
+  background: #fee2e2;
+  border-left-color: #ef4444;
+}
+
+
+
+/* =========================
+   EXPENSE CARD
+========================= */
+
+.expense-card {
+  background: white;
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.expense-card h2 {
+  margin-top: 0;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-approved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   LOGIN
+========================= */
+.card h1{
+ color: #10b981;
+ margin: 5px;
+ padding: 20px;
+ text-align: center;
+}
